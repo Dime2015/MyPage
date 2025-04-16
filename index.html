@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Analyst Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap">
+    <style>
+        .tagline-container a {
+            color: #0366d6;
+            font-weight: 500;
+            border-bottom: 1px solid #0366d6;
+            padding-bottom: 1px;
+            transition: all 0.2s ease;
+        }
+
+        .tagline-container a:hover {
+            background-color: rgba(3, 102, 214, 0.1);
+            border-bottom: 2px solid #0366d6;
+        }
+
+        /* Section Content 左对齐修改 */
+        .section-content {
+            max-width: 800px;
+            margin: 0 auto 0 0; /* 修改为左对齐 */
+            padding-left: 0; /* 确保没有左侧内边距 */
+        }
+
+        /* Section Titles 左对齐修改 */
+        .section-title {
+            margin-bottom: var(--spacing-md);
+            font-weight: 400;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            left: 0; /* 移除原有的居中定位 */
+            transform: none; /* 移除原有的位移 */
+            display: block; /* 改为块级元素 */
+            text-align: left; /* 明确设置为左对齐 */
+        }
+
+        /* Hero 部分已经是左对齐的，但为了保持一致性，显式设置 */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start; /* 确保左对齐 */
+            height: auto;
+            padding: var(--spacing-xl) 0;
+        }
+
+        /* 所有section增加一致的左内边距 */
+        .section {
+            padding: var(--spacing-lg);
+        }
+
+        /* 引用部分修改 */
+        blockquote {
+            margin: var(--spacing-md) 0 0; /* 修改为左对齐的边距 */
+        }
+
+        .subtle-link {
+            color: inherit; /* 使用继承的文本颜色 */
+            border-bottom: 1px dotted #999; /* 使用点状下划线 */
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .subtle-link:hover {
+            border-bottom: 1px solid #333; /* 悬停时使用实线下划线 */
+            background-color: transparent; /* 不使用背景色 */
+        }
+
+        .prominent-link {
+            color: #0366d6; /* 明显的蓝色 */
+            font-weight: 500; /* 加粗 */
+            text-decoration: underline; /* 添加下划线 */
+            border-bottom: none; /* 移除之前的边框样式 */
+            padding: 0 4px; /* 添加一些内边距 */
+            transition: all 0.2s ease;
+        }
+
+        .prominent-link:hover {
+            background-color: rgba(3, 102, 214, 0.1); /* 悬停时添加浅蓝色背景 */
+            text-decoration: underline; /* 保持下划线 */
+        }
+
+        /* 背景图片设置 */
+        .header-with-bg {
+            position: relative;
+            overflow: hidden; /* 确保背景图不会溢出 */
+            padding: var(--spacing-lg);
+            border: none;
+            border-bottom: 1px solid var(--border); /* 添加与其他模块相同的分割线 */
+        }
+
+        .bg-image {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background-image: none; /* 移除任何背景图片 */
+            background-size: contain !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            opacity: 1; /* 临时设为完全不透明，查看图片是否存在 */
+            z-index: 0 !important;
+        }
+
+        .header-with-bg .hero {
+            position: relative;
+            z-index: 1; /* 确保内容在背景之上 */
+            background-color: rgba(255, 255, 255, 0.7); /* 半透明白色背景提高文字可读性 */
+            padding: 2rem;
+            border-radius: 4px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* 文本容器样式优化 */
+        .tagline-container {
+            max-width: 600px;
+        }
+
+        .tagline-container p {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: var(--spacing-sm);
+            white-space: normal; /* 确保文本自然换行 */
+        }
+
+        .portrait-img {
+            width: 100%;
+            height: auto;
+            opacity: 0.8;
+            filter: grayscale(100%);
+            border: none !important; /* 使用!important确保优先级 */
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        /* 修改头部布局为并排显示图片和文本 */
+        .header-with-bg {
+            padding: var(--spacing-lg);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            justify-content: flex-start;
+            gap: calc(var(--spacing-sm) * 0.3);
+            padding-left: 0; /* 移除额外的左内边距 */
+            overflow: visible; /* 确保溢出内容不会被裁剪 */
+        }
+
+        /* 图片容器样式 */
+        .portrait-container {
+            flex: 0 0 auto;
+            width: 180px;
+            margin-right: calc(var(--spacing-sm) * 0.3);
+            position: relative;
+            left: 36px; /* 向右移动图片宽度的20% */
+        }
+
+        .portrait-img {
+            width: 100%;
+            height: auto;
+            opacity: 0.8;
+            filter: grayscale(100%);
+            border: none !important; /* 使用!important确保优先级 */
+            outline: none !important;
+            box-shadow: none !important;
+            /* 临时添加以下样式用于调试 */
+            /* border: 1px solid red !important; */
+        }
+
+        /* 英雄区内容样式调整 */
+        .hero {
+            flex: 1;
+            padding-left: 0;
+            margin-left: 0;
+            position: relative;
+            left: 0; /* 保持文字位置不变 */
+        }
+
+        .hero h1 {
+            margin-top: 0;
+            margin-bottom: var(--spacing-xs); /* 减小底部边距 */
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .portrait-container {
+                margin-right: 0;
+                margin-bottom: var(--spacing-md);
+                width: 150px;
+            }
+        }
+
+        /* 确保与下方模块之间有适当的间距 */
+        #highlights {
+            padding-top: var(--spacing-lg); /* 保持上方内边距 */
+            border-bottom: 1px solid var(--border); /* 确保下方的分割线也存在 */
+        }
+
+        /* 折叠式内容的样式 */
+        .collapsible-container {
+            margin-top: var(--spacing-xs);
+            display: inline-block; /* 改为inline-block，避免占据整行 */
+        }
+
+        /* 修改按钮样式确保不会换行 */
+        .collapse-btn {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            padding: var(--spacing-xs) 0;
+            text-align: left;
+            width: auto;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            white-space: nowrap; /* 防止文本换行 */
+        }
+
+        .collapse-btn:hover {
+            color: var(--accent);
+            background-color: transparent;
+        }
+
+        .collapse-btn:after {
+            content: '+';
+            margin-left: 0.5rem;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .collapse-btn.active:after {
+            content: '−';
+        }
+
+        /* 确保内容区域在按钮下方正常显示 */
+        .collapse-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: transparent;
+            width: 100%; /* 确保内容宽度占满父容器 */
+            position: relative; /* 添加相对定位 */
+            left: 0; /* 确保内容左对齐 */
+        }
+
+        /* 调整列表样式以适应折叠容器 */
+        .collapse-content .bullet-list {
+            padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-xs);
+            margin: 0;
+        }
+
+        .collapse-content .bullet-list li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        /* 案例卡片网格样式 */
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 两列均匀分布 */
+            gap: var(--spacing-lg); /* 卡片之间的间距 */
+            margin-top: var(--spacing-md);
+        }
+
+        /* 案例卡片样式 */
+        .case-card {
+            background-color: white;
+            border: 1px solid var(--border);
+            padding: var(--spacing-md);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .case-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        /* 案例标题样式 */
+        .case-title {
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text);
+        }
+
+        /* 案例描述样式 */
+        .case-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: var(--spacing-md);
+            flex-grow: 1; /* 让描述区域占据卡片的可用空间 */
+        }
+
+        /* 链接按钮样式 */
+        .case-link {
+            display: inline-block;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-align: center;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            align-self: flex-start; /* 按钮左对齐 */
+        }
+
+        .case-link:hover {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .case-grid {
+                grid-template-columns: 1fr; /* 小屏幕上改为单列 */
+            }
+        }
+
+        /* 研究描述区域样式 */
+        .research-description {
+            margin-bottom: var(--spacing-lg);
+            max-width: 800px;
+        }
+
+        .research-description p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* 调整卡片网格的上边距 */
+        .case-grid {
+            margin-top: var(--spacing-lg);
+        }
+
+        /* 调整联系方式容器，确保左对齐 */
+        .contact-container {
+            display: block;
+            max-width: 100%; /* 使用全宽，不限制宽度 */
+            margin: 0; /* 移除自动居中 */
+        }
+
+        /* 调整联系信息样式 */
+        .contact-info {
+            width: 100%;
+            padding: 0; /* 移除内边距 */
+        }
+
+        /* 确保列表项有足够的间距并左对齐 */
+        .contact-list {
+            padding-left: 0; /* 移除默认的列表左边距 */
+        }
+
+        .contact-list li {
+            margin-bottom: var(--spacing-md);
+            font-size: 1.1rem;
+            list-style-type: none; /* 移除列表项标记 */
+        }
+
+        /* 确保标题左对齐 */
+        .section-title {
+            text-align: left; /* 确保标题左对齐 */
+            margin-left: 0; /* 移除可能的左边距 */
+            left: 0; /* 如果使用了相对定位 */
+            transform: none; /* 移除任何变换 */
+        }
+
+        /* 调整联系内容区域 */
+        .contact-content {
+            margin-left: 0; /* 确保没有左边距 */
+            padding-left: 0; /* 确保没有左内边距 */
+        }
+    </style>
+</head>
+<body>
+    <aside class="side-nav">
+        <div class="logo">ABOUT ME</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#highlights">Highlights</a></li>
+                <li><a href="#career">Life</a></li>
+                <li><a href="#philosophy">Philosophy</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#strengths">Strengths</a></li>
+                <li><a href="#limitations">Limitations</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header id="home" class="section header-with-bg">
+            <div class="header-content">
+                <div class="portrait-container">
+                    <img src="images/portrait.png" alt="Portrait" class="portrait-img">
+                </div>
+                <div class="hero">
+                    <h1>WENBO PAN (Dime)</h1>
+                    <h2>I am looking for an Investment Analyst Job</h2>
+                    <div class="tagline-container">
+                        <p>I am passionate about equity investing, eager to learn, and constantly exploring what AI tools can do.</p>
+                        <p>I have no prior experience in HTML — this page was built entirely with <a href="https://chat.openai.com" target="_blank">ChatGPT</a> and <a href="https://cursor.sh" target="_blank">Cursor AI</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section id="highlights" class="section">
+            <div class="section-content">
+                <h2 class="section-title">HIGHLIGHTS OF MYSELF</h2>
+                <ul class="bullet-list">
+                    <li>
+                        Heavy user of AI tools — I rely on them to conduct equity research, learn what I don't yet know, and do things I couldn't do before.
+                    </li>
+                    <li>
+                        Deeply influenced by Warren Buffett's philosophy, a regular reader of Howard Marks' <a href="https://www.oaktreecapital.com/insights/memos" target="_blank" class="subtle-link">memos</a>, and a fan of <a href="https://kr-asia.com/duan-yongping-from-chopping-firewood-in-the-countryside-to-creating-a-billion-dollar-legacy-part-1-of-3" target="_blank" class="subtle-link">Duan Yongping</a> and <a href="https://www.youtube.com/watch?v=4rvTppy1qLI&list=PL2jAZ0x9H0bQFY6wIbQfnrnIlqMcSHd6X" target="_blank" class="subtle-link">Michael Saylor</a>.
+                    </li>
+                    <li>
+                        I don't work purely for money (though I won't lie — it's a factor); I'm lucky to have strong financial backing from my family.
+                    </li>
+                    <li>
+                        My background is in FP&A at an MNC and Product Control at an investment bank — not directly equity investing, but it shaped how I think.
+                    </li>
+                    <li>
+                        You can also know me from this 🔗 <a href="https://chatgpt.com/share/67ff491a-dc08-8009-a552-929dfb24a6d9" target="_blank" class="prominent-link">conversation</a>, it is generated by ChatGPT based on all the conversations we had.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="career" class="section">
+            <div class="section-content">
+                <h2 class="section-title">LIFE TRACK</h2>
+                <div class="timeline">
+                    <!-- 第一个工作经历 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">2022.Oct - Present</div>
+                        <div class="timeline-content">
+                            <h3>Senior Associate – Product Controller of Prime Desk</h3>
+                            <p>Nomura Securities</p>
+                            <div class="collapsible-container">
+                                <button class="collapse-btn">Click to see details</button>
+                                <div class="collapse-content">
+                                    <ul class="bullet-list">
+                                        <li>Monitor and amend daily PnL for Prime Brokerage products (Equity Finance, Cash/Synthetic PB), ensuring accuracy with desk performance and market exposure.</li>
+                                        <li>Partner with traders to provide tailored data analysis on product performance, internal cost transfer, and profit allocation across entities.</li>
+                                        <li>Lead regular and ad-hoc PnL review meetings with Front Office to explain financial insights and support decision-making.</li>
+                                        <li>Develop internal tools and dashboards (Power BI, VBA, Alteryx, GPT) to automate workflows and enhance data processing efficiency.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 第二个工作经历 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">2019.Sep - 2022.Feb</div>
+                        <div class="timeline-content">
+                            <h3>Controller of A&P cost, Overheads and Cashflow</h3>
+                            <p>Danone Japan</p>
+                            <div class="collapsible-container">
+                                <button class="collapse-btn">Click to see details</button>
+                                <div class="collapse-content">
+                                    <ul class="bullet-list">
+                                        <li>Track and forecast A&P spending for all brands using Excel and Power BI; deliver insights and monthly recommendations to brand managers.</li>
+                                        <li>Collaborate with departments to draft annual overhead budgets; monitor actual spending and suggest cost optimizations monthly.</li>
+                                        <li>Evaluate new product profitability using historical cost data (logistics, manufacturing, materials); support brand managers with financial input.</li>
+                                        <li>Prepare profitability analyses for monthly innovation meetings, aligning financial perspective with marketing concepts.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 修改后的第三段时间线 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">2017.Oct - 2019.Sep</div>
+                        <div class="timeline-content">
+                            <h3>Full Time Student of MSc in Finance</h3>
+                            <p>Waseda University</p>
+                            <!-- 移除了collapsible-container及其内容，因为不需要工作职责描述 -->
+                        </div>
+                    </div>
+                    
+                    <!-- 第四个工作经历 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">2015.Oct - 2017.Aug</div>
+                        <div class="timeline-content">
+                            <h3>Auditor</h3>
+                            <p>PriceWaterhouseCoopers China</p>
+                            <div class="collapsible-container">
+                                <button class="collapse-btn">Click to see details</button>
+                                <div class="collapse-content">
+                                    <ul class="bullet-list">
+                                        <li>Conducted audits on Revenues, Receivables, Cash, and Expenses for four clients in the automotive parts manufacturing industry.</li>
+                                        <li>Prepared year-end fluctuation analysis reports to assess and monitor financial risks.</li>
+                                        <li>Interviewed client managers to evaluate internal controls and identify risks in revenue and cost fluctuations.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 修改后的第五段时间线 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">2011.Sep - 2015.Jun</div>
+                        <div class="timeline-content">
+                            <h3>Full Time Student of Accounting Undergraduate School</h3>
+                            <p>Shanghai University of International Business and Economics</p>
+                            <!-- 移除了collapsible-container及其内容，因为不需要工作职责描述 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="philosophy" class="section">
+            <div class="section-content">
+                <h2 class="section-title">MY INVESTMENT PHILOSOPHY</h2>
+                <ul class="bullet-list">
+                    <li>
+                        <span class="number-bullet">01.</span>
+                        <div class="bullet-content">
+                            <h3>Betting on Understandable Trends</h3>
+                            <p>I invest in companies that align with future trends I can truly understand — businesses that deliver products or services people genuinely love and society truly needs.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="number-bullet">02.</span>
+                        <div class="bullet-content">
+                            <h3>Price Over Quality – Always with Courage and Patience</h3>
+                            <p>A great company isn't always a great investment — price matters more. I believe the perfect investment is born from patience, courage, and the willingness to go against the tide. I constantly remind myself: never invest out of FOMO.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="number-bullet">03.</span>
+                        <div class="bullet-content">
+                            <h3>Long-Termism: Let Strategy and Value Unfold Over Time</h3>
+                            <p>Great companies need time to execute strategies and turn visions into concrete results. Likewise, investments need time for value to be discovered — or rediscovered. Short-term gains or losses are just noise; I focus on the signal.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="number-bullet">04.</span>
+                        <div class="bullet-content">
+                            <h3>Investing Is a Way of Life</h3>
+                            <p>True investing goes beyond markets and tickers — it's about principles that apply to both capital and life. Even after all the analysis, your final decision often reflects your values and beliefs. In the end, how you invest is how you see the world.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="research" class="section">
+            <div class="section-content">
+                <h2 class="section-title">CASES I DO RESEARCH WITH LLM TOOLS</h2>
+                
+                <!-- 更新后的描述区域 -->
+                <div class="research-description">
+                    <p>I share my dialogues with large language models (LLMs) not to showcase the model — but to showcase how I use it. These conversations demonstrate how I break through barriers of language, technical knowledge, and time efficiency to conduct deep, cross-lingual, cross-market equity research.</p>
+                    
+                    <p>I encourage you to focus on the thinking process: the questions I ask, how I ask them, and the sequence in which I structure them. This is where you'll see how I reason, how I learn, and how I adapt.</p>
+                    
+                    <p>Even as a non-native Japanese speaker without institutional resources, I've been able to perform high-quality research at scale — not despite my limitations, but because I learned to leverage the right tools with the right mindset.</p>
+                </div>
+                
+                <div class="case-grid">
+                    <!-- 第一个案例 -->
+                    <div class="case-card">
+                        <h3 class="case-title">Quick M&A and Valuation Analysis on Celsius Drinks (CELH) with Gemini</h3>
+                        <p class="case-description">Using Google Gemini, I quickly parsed Celsius Holdings' 2024 annual and 2025 Q1 earnings reports to assess valuation, cash position, and business performance. I focused on understanding the 2024 acquisition of Big Beverages and conducted basic financial modeling on the 2025 Alani Nu acquisition to estimate its potential impact.</p>
+                        <a href="https://g.co/gemini/share/55b4c535f354" target="_blank" class="case-link">View Conversation</a>
+                    </div>
+                    
+                    <!-- 第二个案例 -->
+                    <div class="case-card">
+                        <h3 class="case-title">Indirect Bitcoin Exposure Strategies from a Japan-Based Investor's Lens</h3>
+                        <p class="case-description">Approaching as a Tokyo-based investor, I used LLM tools to explore how to gain Bitcoin exposure without directly holding BTC. Through high-quality prompts, I quickly mapped out mainstream indirect methods, compared their pros and cons, identified key investment vehicles, and defined criteria to evaluate their effectiveness and risks.</p>
+                        <a href="https://g.co/gemini/share/a66d51c63318" target="_blank" class="case-link">View Conversation</a>
+                    </div>
+                    
+                    <!-- 第三个案例 -->
+                    <div class="case-card">
+                        <h3 class="case-title">AI Impact on Financial Services</h3>
+                        <p class="case-description">Collaborated with GPT-4 to research how AI is transforming traditional banking and investment management. Mapped potential disruption vectors and identified companies positioned to benefit.</p>
+                        <a href="#" class="case-link">View Conversation</a>
+                    </div>
+                    
+                    <!-- 第四个案例 -->
+                    <div class="case-card">
+                        <h3 class="case-title">Renewable Energy Investment Analysis</h3>
+                        <p class="case-description">Used LLMs to compile and interpret global renewable energy policy changes and technology advancements. Created a comparative analysis of solar, wind, and hydrogen investment opportunities.</p>
+                        <a href="#" class="case-link">View Conversation</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="strengths" class="section">
+            <div class="section-content">
+                <h2 class="section-title">WHAT I CAN PROVIDE TO THE TEAM</h2>
+                <ul class="bullet-list">
+                    <li>
+                        <div class="bullet-content">
+                            <h3>Constantly Updated Insights on Using AI in Investment Research</h3>
+                            <p>I bring hands-on experience with a wide range of AI tools, from cross-language reading and idea synthesis to deep research and internal tool development. I stay up to date with the latest trends and best practices, and can help the team continuously improve how we use AI for investment analysis — not just in theory, but in day-to-day workflows.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="bullet-content">
+                            <h3>Fresh and Intuitive Perspective on AI-Driven Industry Shifts</h3>
+                            <p>With a strong personal interest in technology, AI, and consumer electronics, I have developed a sharp intuition for identifying emerging business opportunities and industry trends. I believe the next decade will redefine how industries operate under the influence of AI, and I'm confident in offering fresh, forward-looking insights on how AI will transform — or create — entire sectors.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="bullet-content">
+                            <h3>Early-Stage Insights from Non-Traditional Channels</h3>
+                            <p>I actively engage with online communities like X, Reddit, and Zhihu to capture user needs and emerging trends before they reach the mainstream. My curiosity and communication habits help me identify new business models and product categories at a very early stage — often through signals others overlook. This gives me access to more grounded, first-hand insights that are closer to how people actually think and behave.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="bullet-content">
+                            <h3>Self-Driven Investor with Independent and Evolving Views</h3>
+                            <p>I have a deep personal passion for investing — beyond just financial returns. I actively follow podcasts, blogs, interviews, and analysis from both well-known and lesser-known investors to sharpen my understanding of markets and trends. As a self-driven learner, I bring independent thinking and fresh perspectives to the team, rather than simply echoing mainstream views.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="limitations" class="section">
+            <div class="section-content">
+                <h2 class="section-title">THINGS I CANNOT DO (CURRENTLY)</h2>
+                <ul class="bullet-list">
+                    <li>
+                        <div class="bullet-content">
+                            <h3>I Can't Yet Communicate Complex Ideas in Japanese</h3>
+                            <p>While I can read and understand Japanese to a certain extent, my spoken fluency is still a work in progress. This currently limits my ability to express nuanced views in team discussions or conduct interviews, presentations, and business communications in Japanese — especially with external clients or targets. I'm actively working on it.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="bullet-content">
+                            <h3>I Don't Trade — I Invest</h3>
+                            <p>I don't engage in day trading, short selling, or complex option strategies — they're not in my current toolkit. I've never bought options, but I do understand and apply conservative strategies like selling covered calls or cash-secured puts, which I view as running a small insurance company on my portfolio. My focus is on long-term positioning, not fast moves.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="section-content contact-content">
+                <h2 class="section-title">CONTACT</h2>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <ul class="contact-list">
+                            <li>Email: <a href="mailto:nicoface1993@gmail.com">nicoface1993@gmail.com</a></li>
+                            <li>LinkedIn: <a href="https://www.linkedin.com/in/wenbo-pan-4a0b93235/" target="_blank">linkedin.com/in/wenbo-pan-4a0b93235</a></li>
+                            <li>Phone: +81 (70) 3962 9506</li>
+                            <li>Location: Japan, Tokyo, Shinjuku</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2023 John Doe</p>
+        </footer>
+    </main>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const collapseBtns = document.querySelectorAll('.collapse-btn');
+        
+        collapseBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // 切换按钮的活动状态
+                this.classList.toggle('active');
+                
+                // 获取对应的内容元素
+                const content = this.nextElementSibling;
+                
+                // 切换内容显示/隐藏
+                if (content.style.maxHeight) {
+                    // 折叠内容
+                    content.style.maxHeight = null;
+                    this.textContent = 'Click to see details';
+                    // 恢复加号
+                    this.classList.remove('active');
+                } else {
+                    // 展开内容
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    this.textContent = 'Hide details';
+                    // 切换为减号
+                    this.classList.add('active');
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html> 

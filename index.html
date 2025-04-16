@@ -141,96 +141,46 @@
             box-shadow: none !important;
         }
 
-        /* 修改头部布局为并排显示图片和文本 */
-        .header-with-bg {
-            padding: var(--spacing-lg);
+        /* 进一步调整图像位置，使其更靠近文字 */
+        .portrait-container {
+            flex: 0 0 auto;
+            width: 180px;
+            margin-right: 0; /* 移除额外的右边距 */
+            position: relative;
+            left: 0; /* 重置任何偏移 */
         }
 
+        /* 调整文本容器位置，向左移动 */
+        .hero {
+            flex: 1;
+            padding-left: 0;
+            margin-left: 0;
+            position: relative;
+            left: 0; /* 重置任何偏移 */
+        }
+
+        /* 进一步缩短图像和文字之间的距离 */
         .header-content {
             display: flex;
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
             justify-content: flex-start;
-            gap: calc(var(--spacing-sm) * 0.3);
-            padding-left: 0; /* 移除额外的左内边距 */
-            overflow: visible; /* 确保溢出内容不会被裁剪 */
+            gap: 0; /* 使用固定的小间距 */
         }
 
-        /* 图片容器样式 */
-        .portrait-container {
-            flex: 0 0 auto;
-            width: 180px;
-            margin-right: calc(var(--spacing-sm) * 0.3);
-            position: relative;
-            left: -36px; /* 如果您之前有向左移动的设置 */
-        }
-
-        .portrait-img {
-            width: 100%;
-            height: auto;
-            opacity: 0.8;
-            filter: grayscale(100%);
-            border: none !important; /* 使用!important确保优先级 */
-            outline: none !important;
-            box-shadow: none !important;
-            /* 临时添加以下样式用于调试 */
-            /* border: 1px solid red !important; */
-        }
-
-        /* 英雄区内容样式调整 */
-        .hero {
-            flex: 1;
-            padding-left: 0;
-            margin-left: 0;
-            position: relative;
-            left: 0; /* 保持文字位置不变 */
-        }
-
-        .hero h1 {
-            margin-top: 0;
-            margin-bottom: var(--spacing-xs); /* 减小底部边距 */
-        }
-
-        /* 响应式调整 */
+        /* 确保在移动设备上保持居中 */
         @media (max-width: 768px) {
-            /* 重置所有可能影响居中的属性 */
             .header-content {
                 flex-direction: column;
-                padding: 0 !important;
-                margin: 0 auto !important;
-                width: 100% !important;
-                align-items: center !important;
-                justify-content: center !important;
+                gap: var(--spacing-sm); /* 在垂直布局中保持适当间距 */
             }
             
-            /* 强制图片容器居中 */
             .portrait-container {
-                width: 180px !important;
-                margin: 0 auto 20px auto !important; /* 上右下左 */
-                left: 0 !important; /* 移除任何偏移 */
-                position: static !important; /* 移除相对定位 */
-                display: block !important;
-                text-align: center !important;
+                margin: 0 auto var(--spacing-md) !important;
             }
             
-            /* 强制图片本身居中 */
-            .portrait-img {
-                display: block !important;
-                margin: 0 auto !important;
-                max-width: 100% !important;
-                height: auto !important;
-            }
-            
-            /* 确保其他内容也居中 */
             .hero {
-                width: 100% !important;
-                text-align: center !important;
-                padding: 0 15px !important;
-            }
-            
-            .tagline-container {
-                margin: 0 auto !important;
                 text-align: center !important;
             }
         }

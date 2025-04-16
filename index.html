@@ -163,7 +163,7 @@
             width: 180px;
             margin-right: calc(var(--spacing-sm) * 0.3);
             position: relative;
-            left: 36px; /* 向右移动图片宽度的20% */
+            left: -36px; /* 如果您之前有向左移动的设置 */
         }
 
         .portrait-img {
@@ -194,15 +194,44 @@
 
         /* 响应式调整 */
         @media (max-width: 768px) {
+            /* 重置所有可能影响居中的属性 */
             .header-content {
                 flex-direction: column;
-                text-align: center;
+                padding: 0 !important;
+                margin: 0 auto !important;
+                width: 100% !important;
+                align-items: center !important;
+                justify-content: center !important;
             }
             
+            /* 强制图片容器居中 */
             .portrait-container {
-                margin-right: 0;
-                margin-bottom: var(--spacing-md);
-                width: 150px;
+                width: 180px !important;
+                margin: 0 auto 20px auto !important; /* 上右下左 */
+                left: 0 !important; /* 移除任何偏移 */
+                position: static !important; /* 移除相对定位 */
+                display: block !important;
+                text-align: center !important;
+            }
+            
+            /* 强制图片本身居中 */
+            .portrait-img {
+                display: block !important;
+                margin: 0 auto !important;
+                max-width: 100% !important;
+                height: auto !important;
+            }
+            
+            /* 确保其他内容也居中 */
+            .hero {
+                width: 100% !important;
+                text-align: center !important;
+                padding: 0 15px !important;
+            }
+            
+            .tagline-container {
+                margin: 0 auto !important;
+                text-align: center !important;
             }
         }
 
@@ -391,6 +420,32 @@
             margin-left: 0; /* 确保没有左边距 */
             padding-left: 0; /* 确保没有左内边距 */
         }
+
+        /* 额外的图片响应式调整 */
+        @media (max-width: 768px) {
+            .header-with-bg {
+                padding: var(--spacing-md);
+            }
+            
+            /* 确保图片容器在手机上完全居中 */
+            .portrait-container {
+                margin: 0 auto var(--spacing-md);
+                width: 150px; /* 在手机上稍微减小尺寸 */
+            }
+            
+            /* 确保图片本身居中 */
+            .portrait-img {
+                display: block;
+                margin: 0 auto;
+            }
+        }
+
+        /* 极小屏幕的额外调整 */
+        @media (max-width: 480px) {
+            .portrait-container {
+                width: 120px; /* 在更小的手机上进一步减小尺寸 */
+            }
+        }
     </style>
 </head>
 <body>
@@ -413,7 +468,7 @@
         <header id="home" class="section header-with-bg">
             <div class="header-content">
                 <div class="portrait-container">
-                    <img src="./images/portrait.png" alt="Portrait" class="portrait-img">
+                    <img src="images/profile.jpg" alt="Portrait" class="portrait-img">
                 </div>
                 <div class="hero">
                     <h1>WENBO PAN (Dime)</h1>

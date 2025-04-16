@@ -29,15 +29,15 @@
 
         /* Section Titles 左对齐修改 */
         .section-title {
+            text-align: left;
             margin-bottom: var(--spacing-md);
             font-weight: 400;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             letter-spacing: 1px;
             text-transform: uppercase;
-            left: 0; /* 移除原有的居中定位 */
-            transform: none; /* 移除原有的位移 */
-            display: block; /* 改为块级元素 */
-            text-align: left; /* 明确设置为左对齐 */
+            left: 0;
+            transform: none;
+            display: block;
         }
 
         /* Hero 部分已经是左对齐的，但为了保持一致性，显式设置 */
@@ -131,26 +131,20 @@
             white-space: normal; /* 确保文本自然换行 */
         }
 
-        .portrait-img {
-            width: 100%;
-            height: auto;
-            opacity: 0.8;
-            filter: grayscale(100%);
-            border: none !important; /* 使用!important确保优先级 */
-            outline: none !important;
-            box-shadow: none !important;
-        }
-
-        /* 进一步调整图像位置，使其更靠近文字 */
         .portrait-container {
             flex: 0 0 auto;
             width: 180px;
-            margin-right: 0; /* 移除额外的右边距 */
+            margin-right: 0;
             position: relative;
-            left: 0; /* 重置任何偏移 */
+            left: 0;
         }
 
-        /* 调整文本容器位置，向左移动 */
+        .portrait-img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* 进一步调整图像位置，使其更靠近文字 */
         .hero {
             flex: 1;
             padding-left: 0;
@@ -173,11 +167,17 @@
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
-                gap: var(--spacing-sm); /* 在垂直布局中保持适当间距 */
+                gap: var(--spacing-sm);
             }
             
             .portrait-container {
+                width: 225px !important; /* 180px的125% = 225px */
                 margin: 0 auto var(--spacing-md) !important;
+            }
+            
+            .portrait-img {
+                width: 100%;
+                height: auto;
             }
             
             .hero {
@@ -256,9 +256,16 @@
         /* 案例卡片网格样式 */
         .case-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 两列均匀分布 */
-            gap: var(--spacing-lg); /* 卡片之间的间距 */
+            grid-template-columns: 1fr; /* 改为单列 */
+            gap: var(--spacing-lg);
             margin-top: var(--spacing-md);
+        }
+
+        /* 恢复较大屏幕上的两列布局 */
+        @media (min-width: 992px) {
+            .case-grid {
+                grid-template-columns: repeat(2, 1fr); /* 在大屏幕上仍使用两列 */
+            }
         }
 
         /* 案例卡片样式 */
@@ -309,13 +316,6 @@
             color: white;
         }
 
-        /* 响应式调整 */
-        @media (max-width: 768px) {
-            .case-grid {
-                grid-template-columns: 1fr; /* 小屏幕上改为单列 */
-            }
-        }
-
         /* 研究描述区域样式 */
         .research-description {
             margin-bottom: var(--spacing-lg);
@@ -326,11 +326,6 @@
             color: var(--text-light);
             font-size: 1rem;
             line-height: 1.6;
-        }
-
-        /* 调整卡片网格的上边距 */
-        .case-grid {
-            margin-top: var(--spacing-lg);
         }
 
         /* 调整联系方式容器，确保左对齐 */
@@ -393,7 +388,26 @@
         /* 极小屏幕的额外调整 */
         @media (max-width: 480px) {
             .portrait-container {
-                width: 120px; /* 在更小的手机上进一步减小尺寸 */
+                width: 200px !important; /* 稍微调小一点，但仍然大于原始尺寸 */
+            }
+        }
+
+        /* 确保首页标题（WENBO PAN部分）不受影响 */
+        .hero h1 {
+            font-size: 3rem; /* 保持原有大小 */
+            letter-spacing: 1px;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem; /* 保持原有大小 */
+            margin-bottom: var(--spacing-sm);
+            font-weight: 300;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.3rem; /* 在移动设备上稍微小一点，但仍然比原来大 */
             }
         }
     </style>
@@ -580,7 +594,7 @@
             <div class="section-content">
                 <h2 class="section-title">CASES I DO RESEARCH WITH LLM TOOLS</h2>
                 
-                <!-- 更新后的描述区域 -->
+                <!-- 研究描述区域 -->
                 <div class="research-description">
                     <p>I share my dialogues with large language models (LLMs) not to showcase the model — but to showcase how I use it. These conversations demonstrate how I break through barriers of language, technical knowledge, and time efficiency to conduct deep, cross-lingual, cross-market equity research.</p>
                     
@@ -602,20 +616,6 @@
                         <h3 class="case-title">Indirect Bitcoin Exposure Strategies from a Japan-Based Investor's Lens</h3>
                         <p class="case-description">Approaching as a Tokyo-based investor, I used LLM tools to explore how to gain Bitcoin exposure without directly holding BTC. Through high-quality prompts, I quickly mapped out mainstream indirect methods, compared their pros and cons, identified key investment vehicles, and defined criteria to evaluate their effectiveness and risks.</p>
                         <a href="https://g.co/gemini/share/a66d51c63318" target="_blank" class="case-link">View Conversation</a>
-                    </div>
-                    
-                    <!-- 第三个案例 -->
-                    <div class="case-card">
-                        <h3 class="case-title">AI Impact on Financial Services</h3>
-                        <p class="case-description">Collaborated with GPT-4 to research how AI is transforming traditional banking and investment management. Mapped potential disruption vectors and identified companies positioned to benefit.</p>
-                        <a href="#" class="case-link">View Conversation</a>
-                    </div>
-                    
-                    <!-- 第四个案例 -->
-                    <div class="case-card">
-                        <h3 class="case-title">Renewable Energy Investment Analysis</h3>
-                        <p class="case-description">Used LLMs to compile and interpret global renewable energy policy changes and technology advancements. Created a comparative analysis of solar, wind, and hydrogen investment opportunities.</p>
-                        <a href="#" class="case-link">View Conversation</a>
                     </div>
                 </div>
             </div>

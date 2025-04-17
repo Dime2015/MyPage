@@ -411,38 +411,39 @@
             }
         }
 
-        /* 保持桌面端的垂直导航样式不变 */
-        .vertical-nav {
-            /* 您现有的样式 */
-        }
-
-        /* 移动端进度指示器样式 */
-        .mobile-progress-indicator {
-            display: none; /* 默认隐藏 */
+        /* 添加移动端指示器的CSS */
+        .mobile-indicator {
+            display: none;
             position: fixed;
-            top: 0;
-            right: 0;
-            width: 4px;
-            height: 0;
-            background: linear-gradient(to bottom, #007bff, #00c3ff);
-            z-index: 1000;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #d4af37;
+            padding: 8px 12px;
+            border-radius: 20px;
+            z-index: 100;
             opacity: 0;
             transition: opacity 0.3s ease;
+            font-size: 14px;
+            font-weight: bold;
+            pointer-events: none;
         }
 
-        .mobile-progress-indicator.active {
-            opacity: 0.8;
-        }
-
-        /* 在移动端隐藏原有导航并显示进度指示器 */
+        /* 在桌面端保持垂直导航栏不变 */
         @media (max-width: 768px) {
             .vertical-nav {
-                display: none; /* 在移动端隐藏原有导航 */
+                display: none; /* 在移动端隐藏原导航 */
             }
             
-            .mobile-progress-indicator {
-                display: block;
+            .mobile-indicator {
+                display: block; /* 在移动端显示指示器 */
             }
+        }
+
+        /* 在移动端添加指示器的显示类 */
+        .mobile-indicator.visible {
+            opacity: 1;
         }
     </style>
 </head>
@@ -766,42 +767,9 @@
     });
     </script>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // 检测设备是否为移动端
-        const isMobile = window.innerWidth <= 768;
-        const nav = document.querySelector('.vertical-nav');
-        
-        if (isMobile) {
-            // 创建进度指示器
-            const progressIndicator = document.createElement('div');
-            progressIndicator.className = 'mobile-progress-indicator';
-            document.body.appendChild(progressIndicator);
-            
-            // 监听滚动事件
-            let scrollTimeout;
-            window.addEventListener('scroll', function() {
-                // 计算滚动进度
-                const scrollTop = window.scrollY;
-                const docHeight = document.body.offsetHeight - window.innerHeight;
-                const scrollPercent = (scrollTop / docHeight) * 100;
-                
-                // 更新进度条高度
-                progressIndicator.style.height = `${scrollPercent}%`;
-                
-                // 显示进度条
-                progressIndicator.classList.add('active');
-                
-                // 清除之前的超时
-                clearTimeout(scrollTimeout);
-                
-                // 设置新的超时 - 滚动停止1.5秒后隐藏进度条
-                scrollTimeout = setTimeout(function() {
-                    progressIndicator.classList.remove('active');
-                }, 1500);
-            });
-        }
-    });
-    </script>
+    <!-- 在HTML中添加一个移动端指示器 -->
+    <div class="mobile-indicator">
+        <span id="current-section">Home</span>
+    </div>
 </body>
 </html> 

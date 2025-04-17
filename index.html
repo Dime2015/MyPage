@@ -411,43 +411,110 @@
             }
         }
 
-        /* 添加移动端指示器的CSS */
-        .mobile-indicator {
-            display: none;
+        /* 无背景无边框的极简指示器样式 */
+        .sections-indicator {
+            display: none; /* A默认隐藏 */
             position: fixed;
-            right: 10px;
+            left: 10px;
             top: 50%;
             transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #d4af37;
-            padding: 8px 12px;
-            border-radius: 20px;
-            z-index: 100;
+            padding: 5px;
+            z-index: 1000;
             opacity: 0;
             transition: opacity 0.3s ease;
-            font-size: 14px;
-            font-weight: bold;
             pointer-events: none;
+            background-color: transparent;
         }
 
-        /* 在桌面端保持垂直导航栏不变 */
+        .sections-indicator ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: left;
+        }
+
+        .section-indicator-item {
+            color: rgba(255, 255, 255, 0.35); /* 非常淡的非活跃颜色 */
+            font-size: 10px;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-indicator-item.active {
+            color: #4a90e2; /* 蓝色高亮 */
+            font-weight: 500;
+        }
+
+        .sections-indicator.visible {
+            opacity: 1;
+        }
+
         @media (max-width: 768px) {
             .vertical-nav {
-                display: none; /* 在移动端隐藏原导航 */
+                display: none;
             }
             
-            .mobile-indicator {
-                display: block; /* 在移动端显示指示器 */
+            .sections-indicator {
+                display: block;
             }
         }
 
-        /* 在移动端添加指示器的显示类 */
-        .mobile-indicator.visible {
-            opacity: 1;
+        /* 阅读链接样式 */
+        .reads-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: var(--spacing-md);
+        }
+
+        .read-item {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--text-light);
+        }
+
+        .read-source {
+            color: #0366d6; /* 使用具体的蓝色而不是变量 */
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px solid #0366d6;
+            transition: all 0.2s ease;
+        }
+
+        .read-source:hover {
+            color: #2a6496; /* 深蓝色 */
+            border-bottom-color: #2a6496;
+        }
+
+        .read-description {
+            color: var(--text-light);
         }
     </style>
 </head>
 <body>
+    <div class="sections-indicator">
+        <ul>
+            <li data-section="hero" class="section-indicator-item">Home</li>
+            <li data-section="highlights" class="section-indicator-item">Highlights</li>
+            <li data-section="philosophy" class="section-indicator-item">Philosophy</li>
+            <li data-section="path" class="section-indicator-item">My Path</li>
+            <li data-section="research" class="section-indicator-item">Research</li>
+            <li data-section="reads" class="section-indicator-item">Reads</li>
+            <li data-section="strengths" class="section-indicator-item">Strengths</li>
+            <li data-section="limitations" class="section-indicator-item">Limitations</li>
+            <li data-section="contact" class="section-indicator-item">Contact</li>
+        </ul>
+    </div>
+
+    <div class="mobile-indicator">
+        <span id="current-section">Home</span>
+    </div>
+
     <aside class="side-nav">
         <div class="logo">ABOUT ME</div>
         <nav>
@@ -456,6 +523,7 @@
                 <li><a href="#philosophy">Philosophy</a></li>
                 <li><a href="#path">My Path</a></li>
                 <li><a href="#research">Research</a></li>
+                <li><a href="#reads">What I Read</a></li>
                 <li><a href="#strengths">Strengths</a></li>
                 <li><a href="#limitations">Limitations</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -471,7 +539,6 @@
                 </div>
                 <div class="hero">
                     <h1>WENBO PAN (Dime)</h1>
-                    <h2>I am looking for an Investment Analyst Job</h2>
                     <div class="tagline-container">
                         <p>I am passionate about equity investing, eager to learn, and constantly exploring what AI tools can do.</p>
                         <p>I have no prior experience in HTML — this page was built entirely with <a href="https://chat.openai.com" target="_blank">ChatGPT</a> and <a href="https://cursor.sh" target="_blank">Cursor AI</a>.</p>
@@ -497,7 +564,7 @@
                         My background is in FP&A at an MNC and Product Control at an investment bank — not directly equity investing, but it shaped how I think.
                     </li>
                     <li>
-                        You can also know me from this 🔗 <a href="https://chatgpt.com/share/67ff491a-dc08-8009-a552-929dfb24a6d9" target="_blank" class="prominent-link">conversation</a>, it is generated by ChatGPT based on all the conversations we had.
+                        You can also know me from this 🔗 <a href="https://chatgpt.com/share/6800a05c-ae68-8009-9ff2-c6f81d64b7bf" target="_blank" class="prominent-link">conversation</a>, it is generated by ChatGPT based on all the conversations I had with it.
                     </li>
                 </ul>
             </div>
@@ -517,7 +584,7 @@
                     <li>
                         <span class="number-bullet">02.</span>
                         <div class="bullet-content">
-                            <h3>Price Over Quality – Always with Courage and Patience</h3>
+                            <h3>Price Over Quality: Always with Courage and Patience</h3>
                             <p>A great company isn't always a great investment — price matters more. I believe the perfect investment is born from patience, courage, and the willingness to go against the tide. I constantly remind myself: never invest out of FOMO.</p>
                         </div>
                     </li>
@@ -631,11 +698,11 @@
                 
                 <!-- 研究描述区域 -->
                 <div class="research-description">
-                    <p>I share my dialogues with large language models (LLMs) not to showcase the model — but to showcase how I use it. These conversations demonstrate how I break through barriers of language, technical knowledge, and time efficiency to conduct deep, cross-lingual, cross-market equity research.</p>
+                    <p>I share my LLM dialogues not to showcase the model, but to show how I use it — breaking language, knowledge, and time barriers to conduct deep, cross-market equity research.</p>
                     
-                    <p>I encourage you to focus on the thinking process: the questions I ask, how I ask them, and the sequence in which I structure them. This is where you'll see how I reason, how I learn, and how I adapt.</p>
+                    <p>I invite you to focus on the way I think: the questions I ask, how I ask them, and in what order. That's where my reasoning and learning unfold.</p>
                     
-                    <p>Even as a non-native Japanese speaker without institutional resources, I've been able to perform high-quality research at scale — not despite my limitations, but because I learned to leverage the right tools with the right mindset.</p>
+                    <p>Even without native-level Japanese or institutional support, I've delivered high-quality research by using the right tools with the right mindset.</p>
                 </div>
                 
                 <div class="case-grid">
@@ -656,8 +723,34 @@
                     <!-- 原来的第二个案例（现在是第三个） -->
                     <div class="case-card">
                         <h3 class="case-title">Indirect Bitcoin Exposure Strategies from a Japan-Based Investor's Lens</h3>
-                        <p class="case-description">Approaching as a Tokyo-based investor, I used LLM tools to explore how to gain Bitcoin exposure without directly holding BTC. Through high-quality prompts, I quickly mapped out mainstream indirect methods, compared their pros and cons, identified key investment vehicles, and defined criteria to evaluate their effectiveness and risks.</p>
+                        <p class="case-description">Approaching as a Japan-based investor, I used Google Gemini to explore how to gain Bitcoin exposure without directly holding BTC. Through high-quality prompts, I quickly mapped out mainstream indirect methods, compared their pros and cons, identified key investment vehicles, and defined criteria to evaluate their effectiveness and risks.</p>
                         <a href="https://g.co/gemini/share/a66d51c63318" target="_blank" class="case-link">View Conversation</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reads" class="section">
+            <div class="section-content">
+                <h2 class="section-title">WHAT I READ & FOLLOW</h2>
+                <div class="reads-content">
+                    <div class="read-item">
+                        <a href="https://www.oaktreecapital.com/insights/memos" target="_blank" class="read-source">Memos from Howard Marks</a>: <span class="read-description">I read every Howard Marks memo the moment it's out — always full of timeless insights on investing and thinking.</span>
+                    </div>
+                    <div class="read-item">
+                        <a href="https://www.reddit.com/" target="_blank" class="read-source">Reddit</a>: <span class="read-description">A goldmine of first-hand opinions on products, services, and companies. I often find the most candid user feedback here — and in investment threads, sharp insights from independent thinkers.</span>
+                    </div>
+                    <div class="read-item">
+                        <a href="https://x.com/" target="_blank" class="read-source">X.com</a>: <span class="read-description">Yes, 90% is noise — but the remaining 10% is incredibly real-time, raw, and revealing. From firsthand reactions to Tesla's FSD in China to early disappointment around Apple Intelligence, X captures the pulse.</span>
+                    </div>
+                    <div class="read-item">
+                        <a href="https://www.youtube.com/" target="_blank" class="read-source">Youtube</a>: <span class="read-description">My go-to platform for learning new skills and exploring unfamiliar topics. I also use it to watch CEO interviews — a great way to get a feel for a company's leadership.</span>
+                    </div>
+                    <div class="read-item">
+                        <a href="https://www.zhihu.com/" target="_blank" class="read-source">Zhihu.com</a>: <span class="read-description">It's like Quora, but way more active — and uniquely valuable. Despite some censorship, you'll find Chinese AI researchers sharing raw, firsthand takes you won't get anywhere else. I've picked up a lot about LLMs here.</span>
+                    </div>
+                    <div class="read-item">
+                        <a href="https://xueqiu.com/" target="_blank" class="read-source">Xueqiu (snowball)</a>: <span class="read-description">A Chinese investment forum. I follow only one person here — Duan Yongping, a long-time value investor and a friend of Warren Buffett. From NetEase and UHAL to Apple and Moutai, his past investments are classics. He still shares thoughts and chats with users regularly.</span>
                     </div>
                 </div>
             </div>
@@ -767,9 +860,128 @@
     });
     </script>
 
-    <!-- 在HTML中添加一个移动端指示器 -->
-    <div class="mobile-indicator">
-        <span id="current-section">Home</span>
-    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 获取所有需要的元素
+        const sectionsIndicator = document.querySelector('.sections-indicator');
+        const sectionItems = document.querySelectorAll('.section-indicator-item');
+        const sections = document.querySelectorAll('section[id]');
+        let scrollTimeout;
+        
+        // 检查元素是否存在
+        if (!sectionsIndicator) {
+            console.error('Sections indicator not found');
+            return;
+        }
+        
+        // 确保HTML和实际页面结构匹配
+        console.log('Found sections:', Array.from(sections).map(s => s.id));
+        console.log('Found indicator items:', Array.from(sectionItems).map(i => i.dataset.section));
+        
+        // 初始化 - 确保所有指示器项目都存在
+        function initializeIndicator() {
+            // 创建一个映射，将section ID映射到指示器项目
+            const sectionMap = {};
+            sectionItems.forEach(item => {
+                const sectionId = item.getAttribute('data-section');
+                sectionMap[sectionId] = item;
+            });
+            
+            // 检查是否有缺失的section
+            sections.forEach(section => {
+                if (!sectionMap[section.id]) {
+                    console.warn(`Missing indicator item for section: ${section.id}`);
+                }
+            });
+            
+            // 检查是否有多余的指示器项目
+            sectionItems.forEach(item => {
+                const sectionId = item.getAttribute('data-section');
+                if (!document.getElementById(sectionId)) {
+                    console.warn(`Indicator item references non-existent section: ${sectionId}`);
+                }
+            });
+            
+            // 调整为移动视图时立即显示指示器
+            if (window.innerWidth <= 768) {
+                sectionsIndicator.classList.add('visible');
+            }
+        }
+        
+        // 更新当前活跃部分
+        function updateActiveSection() {
+            // 计算视窗中心位置
+            const viewportMiddle = window.scrollY + window.innerHeight / 2;
+            
+            // 找到最接近视窗中心的section
+            let activeSection = null;
+            let minDistance = Infinity;
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const sectionMiddle = window.scrollY + rect.top + rect.height / 2;
+                const distance = Math.abs(viewportMiddle - sectionMiddle);
+                
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    activeSection = section.id;
+                }
+            });
+            
+            // 更新所有指示器项目的状态
+            sectionItems.forEach(item => {
+                const sectionId = item.getAttribute('data-section');
+                if (sectionId === activeSection) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+        
+        // 处理滚动事件
+        function handleScroll() {
+            // 显示指示器
+            sectionsIndicator.classList.add('visible');
+            
+            // 更新活跃部分
+            updateActiveSection();
+            
+            // 清除现有超时
+            clearTimeout(scrollTimeout);
+            
+            // 设置新超时 - 停止滚动后隐藏指示器
+            scrollTimeout = setTimeout(function() {
+                sectionsIndicator.classList.remove('visible');
+            }, 700); // 从1000改为700，即0.7秒
+        }
+        
+        // 添加滚动事件监听
+        window.addEventListener('scroll', handleScroll);
+        
+        // 添加窗口大小变化事件监听
+        window.addEventListener('resize', function() {
+            if (window.innerWidth <= 768) {
+                sectionsIndicator.style.display = 'block';
+            } else {
+                sectionsIndicator.style.display = 'none';
+            }
+        });
+        
+        // 立即执行初始化
+        initializeIndicator();
+        updateActiveSection();
+        
+        // 首次加载时显示指示器1秒
+        if (window.innerWidth <= 768) {
+            sectionsIndicator.classList.add('visible');
+            setTimeout(function() {
+                if (!document.hasFocus() || window.scrollY === 0) {
+                    sectionsIndicator.classList.remove('visible');
+                }
+            }, 1000); // 从1500改为1000，即1秒
+        }
+    });
+    </script>
 </body>
 </html> 

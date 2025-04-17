@@ -410,6 +410,40 @@
                 font-size: 1.3rem; /* 在移动设备上稍微小一点，但仍然比原来大 */
             }
         }
+
+        /* 保持桌面端的垂直导航样式不变 */
+        .vertical-nav {
+            /* 您现有的样式 */
+        }
+
+        /* 移动端进度指示器样式 */
+        .mobile-progress-indicator {
+            display: none; /* 默认隐藏 */
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 0;
+            background: linear-gradient(to bottom, #007bff, #00c3ff);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-progress-indicator.active {
+            opacity: 0.8;
+        }
+
+        /* 在移动端隐藏原有导航并显示进度指示器 */
+        @media (max-width: 768px) {
+            .vertical-nav {
+                display: none; /* 在移动端隐藏原有导航 */
+            }
+            
+            .mobile-progress-indicator {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
@@ -418,8 +452,8 @@
         <nav>
             <ul class="nav-links">
                 <li><a href="#highlights">Highlights</a></li>
-                <li><a href="#career">Life</a></li>
                 <li><a href="#philosophy">Philosophy</a></li>
+                <li><a href="#path">My Path</a></li>
                 <li><a href="#research">Research</a></li>
                 <li><a href="#strengths">Strengths</a></li>
                 <li><a href="#limitations">Limitations</a></li>
@@ -456,7 +490,7 @@
                         Deeply influenced by Warren Buffett's philosophy, a regular reader of Howard Marks' <a href="https://www.oaktreecapital.com/insights/memos" target="_blank" class="subtle-link">memos</a>, and a fan of <a href="https://kr-asia.com/duan-yongping-from-chopping-firewood-in-the-countryside-to-creating-a-billion-dollar-legacy-part-1-of-3" target="_blank" class="subtle-link">Duan Yongping</a> and <a href="https://www.youtube.com/watch?v=4rvTppy1qLI&list=PL2jAZ0x9H0bQFY6wIbQfnrnIlqMcSHd6X" target="_blank" class="subtle-link">Michael Saylor</a>.
                     </li>
                     <li>
-                        I don't work purely for money (though I won't lie — it's a factor); I'm lucky to have strong financial backing from my family.
+                        I've built a financial cushion solid enough to let me focus on curiosity, challenge, and long-term growth — not short-term income. I don't need to take just any job. I choose to work on things I care about.
                     </li>
                     <li>
                         My background is in FP&A at an MNC and Product Control at an investment bank — not directly equity investing, but it shaped how I think.
@@ -468,9 +502,45 @@
             </div>
         </section>
 
-        <section id="career" class="section">
+        <section id="philosophy" class="section">
             <div class="section-content">
-                <h2 class="section-title">LIFE TRACK</h2>
+                <h2 class="section-title">MY INVESTMENT PHILOSOPHY</h2>
+                <ul class="bullet-list">
+                    <li>
+                        <span class="number-bullet">01.</span>
+                        <div class="bullet-content">
+                            <h3>Betting on Understandable Trends</h3>
+                            <p>I invest in companies that align with future trends I can truly understand — businesses that deliver products or services people genuinely love and society truly needs.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="number-bullet">02.</span>
+                        <div class="bullet-content">
+                            <h3>Price Over Quality – Always with Courage and Patience</h3>
+                            <p>A great company isn't always a great investment — price matters more. I believe the perfect investment is born from patience, courage, and the willingness to go against the tide. I constantly remind myself: never invest out of FOMO.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="number-bullet">03.</span>
+                        <div class="bullet-content">
+                            <h3>Long-Termism: Let Strategy and Value Unfold Over Time</h3>
+                            <p>Great companies need time to execute strategies and turn visions into concrete results. Likewise, investments need time for value to be discovered — or rediscovered. Short-term gains or losses are just noise; I focus on the signal.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="number-bullet">04.</span>
+                        <div class="bullet-content">
+                            <h3>Investing Is a Way of Life</h3>
+                            <p>True investing goes beyond markets and tickers — it's about principles that apply to both capital and life. Even after all the analysis, your final decision often reflects your values and beliefs. In the end, how you invest is how you see the world.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="path" class="section">
+            <div class="section-content">
+                <h2 class="section-title">MY PATH</h2>
                 <div class="timeline">
                     <!-- 第一个工作经历 -->
                     <div class="timeline-item">
@@ -554,42 +624,6 @@
             </div>
         </section>
 
-        <section id="philosophy" class="section">
-            <div class="section-content">
-                <h2 class="section-title">MY INVESTMENT PHILOSOPHY</h2>
-                <ul class="bullet-list">
-                    <li>
-                        <span class="number-bullet">01.</span>
-                        <div class="bullet-content">
-                            <h3>Betting on Understandable Trends</h3>
-                            <p>I invest in companies that align with future trends I can truly understand — businesses that deliver products or services people genuinely love and society truly needs.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="number-bullet">02.</span>
-                        <div class="bullet-content">
-                            <h3>Price Over Quality – Always with Courage and Patience</h3>
-                            <p>A great company isn't always a great investment — price matters more. I believe the perfect investment is born from patience, courage, and the willingness to go against the tide. I constantly remind myself: never invest out of FOMO.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="number-bullet">03.</span>
-                        <div class="bullet-content">
-                            <h3>Long-Termism: Let Strategy and Value Unfold Over Time</h3>
-                            <p>Great companies need time to execute strategies and turn visions into concrete results. Likewise, investments need time for value to be discovered — or rediscovered. Short-term gains or losses are just noise; I focus on the signal.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="number-bullet">04.</span>
-                        <div class="bullet-content">
-                            <h3>Investing Is a Way of Life</h3>
-                            <p>True investing goes beyond markets and tickers — it's about principles that apply to both capital and life. Even after all the analysis, your final decision often reflects your values and beliefs. In the end, how you invest is how you see the world.</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
         <section id="research" class="section">
             <div class="section-content">
                 <h2 class="section-title">CASES I DO RESEARCH WITH LLM TOOLS</h2>
@@ -604,14 +638,21 @@
                 </div>
                 
                 <div class="case-grid">
-                    <!-- 第一个案例 -->
+                    <!-- 新添加的第一个案例 -->
+                    <div class="case-card">
+                        <h3 class="case-title">Building a Research Foundation on ITC Limited (India Company) with Gemini</h3>
+                        <p class="case-description">Using Google Gemini, I conducted a high-level overview of ITC Limited, a diversified Indian conglomerate. In a short time, I gained foundational understanding of the company's positioning, market environment, policy landscape, and societal context. This approach allowed me to skip over time-consuming steps like reading local-language reports or digging through fragmented macro data — and instead build a strong base for deeper research ahead.</p>
+                        <a href="https://g.co/gemini/share/a79d1a9f4a82" target="_blank" class="case-link">View Conversation</a>
+                    </div>
+                    
+                    <!-- 原来的第一个案例（现在是第二个） -->
                     <div class="case-card">
                         <h3 class="case-title">Quick M&A and Valuation Analysis on Celsius Drinks (CELH) with Gemini</h3>
                         <p class="case-description">Using Google Gemini, I quickly parsed Celsius Holdings' 2024 annual and 2025 Q1 earnings reports to assess valuation, cash position, and business performance. I focused on understanding the 2024 acquisition of Big Beverages and conducted basic financial modeling on the 2025 Alani Nu acquisition to estimate its potential impact.</p>
                         <a href="https://g.co/gemini/share/55b4c535f354" target="_blank" class="case-link">View Conversation</a>
                     </div>
                     
-                    <!-- 第二个案例 -->
+                    <!-- 原来的第二个案例（现在是第三个） -->
                     <div class="case-card">
                         <h3 class="case-title">Indirect Bitcoin Exposure Strategies from a Japan-Based Investor's Lens</h3>
                         <p class="case-description">Approaching as a Tokyo-based investor, I used LLM tools to explore how to gain Bitcoin exposure without directly holding BTC. Through high-quality prompts, I quickly mapped out mainstream indirect methods, compared their pros and cons, identified key investment vehicles, and defined criteria to evaluate their effectiveness and risks.</p>
@@ -722,6 +763,44 @@
                 }
             });
         });
+    });
+    </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 检测设备是否为移动端
+        const isMobile = window.innerWidth <= 768;
+        const nav = document.querySelector('.vertical-nav');
+        
+        if (isMobile) {
+            // 创建进度指示器
+            const progressIndicator = document.createElement('div');
+            progressIndicator.className = 'mobile-progress-indicator';
+            document.body.appendChild(progressIndicator);
+            
+            // 监听滚动事件
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                // 计算滚动进度
+                const scrollTop = window.scrollY;
+                const docHeight = document.body.offsetHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                
+                // 更新进度条高度
+                progressIndicator.style.height = `${scrollPercent}%`;
+                
+                // 显示进度条
+                progressIndicator.classList.add('active');
+                
+                // 清除之前的超时
+                clearTimeout(scrollTimeout);
+                
+                // 设置新的超时 - 滚动停止1.5秒后隐藏进度条
+                scrollTimeout = setTimeout(function() {
+                    progressIndicator.classList.remove('active');
+                }, 1500);
+            });
+        }
     });
     </script>
 </body>

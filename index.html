@@ -494,6 +494,11 @@
         .read-description {
             color: var(--text-light);
         }
+
+        /* 隐藏移动端顶部指示器 */
+        .mobile-indicator {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -511,7 +516,7 @@
         </ul>
     </div>
 
-    <div class="mobile-indicator">
+    <div class="mobile-indicator" hidden>
         <span id="current-section">Home</span>
     </div>
 
@@ -585,7 +590,7 @@
                         <span class="number-bullet">02.</span>
                         <div class="bullet-content">
                             <h3>Price Over Quality: Always with Courage and Patience</h3>
-                            <p>A great company isn't always a great investment — price matters more. I believe the perfect investment is born from patience, courage, and the willingness to go against the tide. I constantly remind myself: never invest out of FOMO.</p>
+                            <p>A great company isn't always a great investment — price matters more. A low entry price isn't just about upside; it's the most fundamental form of risk management. I believe the perfect investment is born from patience, courage, and the willingness to go against the tide.</p>
                         </div>
                     </li>
                     <li>
@@ -747,7 +752,7 @@
                         <a href="https://www.youtube.com/" target="_blank" class="read-source">Youtube</a>: <span class="read-description">My go-to platform for learning new skills and exploring unfamiliar topics. I also use it to watch CEO interviews — a great way to get a feel for a company's leadership.</span>
                     </div>
                     <div class="read-item">
-                        <a href="https://www.zhihu.com/" target="_blank" class="read-source">Zhihu.com</a>: <span class="read-description">It's like Quora, but way more active — and uniquely valuable. Despite some censorship, you'll find Chinese AI researchers sharing raw, firsthand takes you won't get anywhere else. I've picked up a lot about LLMs here.</span>
+                        <a href="https://www.zhihu.com/" target="_blank" class="read-source">Zhihu.com</a>: <span class="read-description">It's like Quora, but way more active — and uniquely valuable. Despite some censorship, you'll find Chinese AI researchers worked in Silicon Valley sharing raw, firsthand takes you won't get anywhere else. I've picked up a lot about LLMs here.</span>
                     </div>
                     <div class="read-item">
                         <a href="https://xueqiu.com/" target="_blank" class="read-source">Xueqiu (snowball)</a>: <span class="read-description">A Chinese investment forum. I follow only one person here — Duan Yongping, a long-time value investor and a friend of Warren Buffett. From NetEase and UHAL to Apple and Moutai, his past investments are classics. He still shares thoughts and chats with users regularly.</span>
